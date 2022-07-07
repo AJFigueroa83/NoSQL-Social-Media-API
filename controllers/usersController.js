@@ -14,6 +14,7 @@ const usersController = {
         .select('-__v')
         .then(dbUsersData => res.json(dbUsersData))
         .catch(err => {
+            console.log(err);
             res.status(500).json(err);
         })
     },
@@ -36,7 +37,7 @@ const usersController = {
     },
 
     updateUsers({ params }, res) {
-        Users.findOneAndDelete({ _id: params.id}, body, {new: true, runvalidators: true})
+        Users.findOneAndUpdate({ _id: params.id}, body, {new: true, runvalidators: true})
         .then(dbUsersData => {
             if(!dbUsersData) {
                 res.status(404).json({ message: 'No user matched the id'});
@@ -80,7 +81,7 @@ const usersController = {
     },
 
     deleteFriend({ params }, res) {
-        Users.findOneAndUpdate({ _id: params.id }, {$pull: { friends: params.friendId}}, {new: true})
+        Users.findOneAndDelete({ _id: params.id }, {$pull: { friends: params.friendId}}, {new: true})
         .populate({ path: 'friends', select: ('-__v')})
         .select('-__v')
         .then(dbUsersData => {
