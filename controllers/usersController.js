@@ -36,7 +36,7 @@ const usersController = {
         })
     },
 
-    updateUsers({ params }, res) {
+    updateUsers({ params, body }, res) {
         Users.findOneAndUpdate({ _id: params.id}, body, {new: true, runvalidators: true})
         .then(dbUsersData => {
             if(!dbUsersData) {
@@ -81,7 +81,7 @@ const usersController = {
     },
 
     deleteFriend({ params }, res) {
-        Users.findOneAndDelete({ _id: params.id }, {$pull: { friends: params.friendId}}, {new: true})
+        Users.findOneAndDelete({ _id: params.id })
         .populate({ path: 'friends', select: ('-__v')})
         .select('-__v')
         .then(dbUsersData => {
