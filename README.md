@@ -32,9 +32,9 @@ This application will allow the user to create a database using insomnia. When t
 All contibuitons are welcome. Please feel free to contact me. See below for contact information.
 
 
-## Tests
+## Mock-Up
 
-N/A
+![NoSqlsocial media platform backend demo](./mock-up.gif)
 
 ## Deployment
 
